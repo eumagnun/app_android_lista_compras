@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ListaCompras">
+        <activity android:name=".VisualizarActivity"></activity>
         <activity android:name=".ListaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,9 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastroActivity">
-
-        </activity>
+        <activity android:name=".CadastroActivity"></activity>
     </application>
 
 </manifest>
