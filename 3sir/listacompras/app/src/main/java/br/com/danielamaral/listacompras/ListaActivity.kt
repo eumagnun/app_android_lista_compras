@@ -10,7 +10,7 @@ import br.com.danielamaral.listacompras.adapter.ItemAdapter
 import br.com.danielamaral.listacompras.model.Produto
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ListaActivity : AppCompatActivity() {
+class ListaActivity : AppCompatActivity(), ItemAdapter.OnProdutoClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,12 +21,18 @@ class ListaActivity : AppCompatActivity() {
         val rvListaCompras:RecyclerView  = findViewById(R.id.rvListaCompras)
         rvListaCompras.layoutManager = LinearLayoutManager(this)
 
-        rvListaCompras.adapter = ItemAdapter(Database.listaCompras)
+        rvListaCompras.adapter = ItemAdapter(Database.listaCompras, this)
 
         val fabCadastrarProduto:FloatingActionButton = findViewById(R.id.fabCadastraProduto)
         fabCadastrarProduto.setOnClickListener {
             val intent = Intent(this, CadastroActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onProdutoClick(produtoPosition: Int) {
+        val intent = Intent(this, VisualizarActivity::class.java)
+        intent.putExtra("dados",Database.listaCompras[produtoPosition])
+        startActivity(intent)
     }
 }
