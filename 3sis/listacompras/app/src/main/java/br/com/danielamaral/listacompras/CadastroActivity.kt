@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.TextView
 import br.com.danielamaral.listacompras.model.Produto
 
-class CadastroActivity : AppCompatActivity() {
+class CadastroActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +26,17 @@ class CadastroActivity : AppCompatActivity() {
                         ,etMarcaProduto.text.toString()
                         ,etPrecoProduto.text.toString())
 
-
             etNomeProduto.text=""
             etMarcaProduto.text=""
             etPrecoProduto.text=""
 
-            val intent = Intent(this, ListaActivity::class.java)
-            startActivity(intent)
+            esconderTeclado()
+
+            navegar(classe= ListaActivity::class.java)
+
         }
 
     }
-
-
 
     fun cadastraItem(nome:String, marca:String, preco:String){
         Database.listaCompras.add(Produto(nome = nome, marca=marca, preco=preco.toDouble()))
