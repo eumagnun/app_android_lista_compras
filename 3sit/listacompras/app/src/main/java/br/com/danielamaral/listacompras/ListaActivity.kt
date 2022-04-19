@@ -10,7 +10,7 @@ import br.com.danielamaral.listacompras.adapter.ItemAdapter
 import br.com.danielamaral.listacompras.model.Produto
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ListaActivity : AppCompatActivity(), ItemAdapter.OnProdutoClickListener {
+class ListaActivity : BaseActivity(), ItemAdapter.OnProdutoClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +25,11 @@ class ListaActivity : AppCompatActivity(), ItemAdapter.OnProdutoClickListener {
 
         val fabCadastrarProduto:FloatingActionButton = findViewById(R.id.fabCadastraProduto)
         fabCadastrarProduto.setOnClickListener {
-            val intent = Intent(this, CadastroActivity::class.java)
-            startActivity(intent)
+            navegar(null,CadastroActivity::class.java)
         }
     }
 
     override fun onProdutoClick(produtoClicado: Int) {
-        val intent  =Intent(this, VisualizarActivity::class.java)
-        intent.putExtra("produtoSelecionado",Database.listaCompras[produtoClicado])
-        startActivity(intent)
+        navegar(Database.listaCompras[produtoClicado],VisualizarActivity::class.java)
     }
 }

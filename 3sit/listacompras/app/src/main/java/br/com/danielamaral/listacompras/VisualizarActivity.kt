@@ -3,25 +3,24 @@ package br.com.danielamaral.listacompras
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import br.com.danielamaral.listacompras.databinding.ActivityVisualizarBinding
 import br.com.danielamaral.listacompras.model.Produto
 
 class VisualizarActivity : AppCompatActivity() {
 
     private lateinit var produtoSelecionado: Produto
+    private lateinit var binding: ActivityVisualizarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_visualizar)
+           binding = DataBindingUtil.setContentView(this,R.layout.activity_visualizar)
 
-        produtoSelecionado = intent.getSerializableExtra("produtoSelecionado") as Produto
+        produtoSelecionado = intent.getSerializableExtra("param") as Produto
 
-        val tvNome:TextView = findViewById(R.id.tvNome)
-        val tvMarca:TextView = findViewById(R.id.tvMarca)
-        val tvPreco:TextView = findViewById(R.id.tvPreco)
-
-        tvNome.text = produtoSelecionado.nome
-        tvMarca.text = produtoSelecionado.marca
-        tvPreco.text = produtoSelecionado.preco.toString()
+        binding.tvNome.text = produtoSelecionado.nome
+        binding.tvMarca.text = produtoSelecionado.marca
+        binding.tvPreco.text = produtoSelecionado.preco.toString()
 
     }
 }
