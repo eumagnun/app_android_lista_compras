@@ -13,7 +13,7 @@ class VisualizarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_visualizar)
 
-        produtoSelecionado = intent.getSerializableExtra("dados") as Produto
+        produtoSelecionado = intent.getSerializableExtra("param") as Produto
 
         val tvItemNome:TextView = findViewById(R.id.tvItemNome)
         val tvItemMarca:TextView = findViewById(R.id.tvItemMarca)
