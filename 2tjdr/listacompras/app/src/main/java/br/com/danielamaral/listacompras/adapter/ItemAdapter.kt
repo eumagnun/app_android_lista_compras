@@ -4,22 +4,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.danielamaral.listacompras.R
 import br.com.danielamaral.listacompras.model.Produto
 
-class ItemAdapter(val dados:List<Produto>):RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter(val dados:List<Produto>, val onProdutoClickListener:OnProdutoClickListener):RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
-    class  ItemViewHolder(view: View):RecyclerView.ViewHolder(view){
+    class  ItemViewHolder(view: View, val onProdutoClickListener:OnProdutoClickListener):RecyclerView.ViewHolder(view),View.OnClickListener{
         val tvItemNome:TextView = view.findViewById(R.id.tvItemNome)
         val tvItemMarca:TextView = view.findViewById(R.id.tvItemMarca)
         val tvItemPreco:TextView = view.findViewById(R.id.tvItemPreco)
+        val cvRaizItemLista:CardView = view.findViewById(R.id.cvRaizItemLista)
+
+        init{
+            cvRaizItemLista.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            onProdutoClickListener.onProdutoClick(adapterPosition)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_lista,parent,false)
-        return ItemViewHolder(adapterLayout)
+        return ItemViewHolder(adapterLayout,onProdutoClickListener)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
@@ -31,5 +41,9 @@ class ItemAdapter(val dados:List<Produto>):RecyclerView.Adapter<ItemAdapter.Item
 
     override fun getItemCount(): Int {
         return dados.size
+    }
+
+    interface OnProdutoClickListener{
+        fun onProdutoClick(produtoPosition:Int)
     }
 }
