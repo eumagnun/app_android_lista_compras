@@ -11,9 +11,7 @@ class CadastroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val tvSaida:TextView = findViewById(R.id.tvSaida)
+        setContentView(R.layout.activity_cadastro)
 
         val etNomeProduto:TextView = findViewById(R.id.etNomeProduto)
         val etMarcaProduto:TextView = findViewById(R.id.etMarcaProduto)
